@@ -12,6 +12,11 @@ router.get("/", function (_, res) {
   res.json(data);
 });
 
+router.get('/clean', function(_, res) {
+  data.splice(0, data.length);
+  return res.send("ok");
+});
+
 router.post("/", function (req, res) {
   if (!req.body.result) return res.status(400).send({ error: "bad request" });
   data.push({
@@ -21,10 +26,6 @@ router.post("/", function (req, res) {
   res.json("ok");
 });
 
-router.delete('/all', function(_, res) {
-  data.splice(0, data.length);
-  return res.send("ok");
-});
 
 router.delete("/:id", function (req, res) {
   const paramId = req.params.id;
